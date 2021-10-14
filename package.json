@@ -1,0 +1,23 @@
+{
+  "name": "blog-pr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy --input=src --output=docs",
+    "server": "npx @11ty/eleventy --serve --input=src --output=docs"
+  },
+  "pre-commit": [
+    "build"
+  ],
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "homepage": "https://mieszkogulinski.github.io",
+  "dependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.1",
+    "@sherby/eleventy-plugin-files-minifier": "^1.1.1",
+    "pre-commit": "^1.2.2"
+  }
+}

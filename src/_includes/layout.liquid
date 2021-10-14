@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ pageTitle }}</title>
+    <style>
+      html, body {
+        margin: 0 0;
+      }
+      body {
+        color: #222222;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+      article, .header-content, footer {
+        margin: 0 auto;
+        padding: 0 15px;
+        max-width: 710px;
+      }
+      h1 {
+        border-bottom: 2px solid #FFD744;
+        padding-bottom: 15px;
+        font-size: 32px;
+      }
+      .blog-name {
+        text-align: center;
+        padding-bottom: 25px;
+      }
+      h2 {
+        font-size: 26px;
+      }
+      h3 {
+        font-size: 22px;
+      }
+      a {
+        text-decoration: none;
+        color: #927200;
+        transition: color 0.25s ease-out;
+      }
+      a:hover {
+        color: #BB9200;
+      }
+      code {
+        font-size: 14px;
+      }
+      pre {
+        overflow: auto;
+      }
+      img {
+        max-width: 100%;
+      }
+
+      .footer-content {
+        margin-top: 15px;
+        border-top: 2px solid #FFD744;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .art-list-link {
+        margin-bottom: 5px;
+      }
+      .art-list-link a {
+        color: #222222;
+        transition: color 0.2s ease-out;
+      }
+      .art-list-link a:hover {
+        color: #555555;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #222222;
+          color: #FFFFFF;
+        }
+        a {
+          color: #FFD744;
+        }
+        a:hover {
+          color: #BB9200;
+        }
+        .art-list-link a {
+          color: #FFFFFF;
+        }
+        .art-list-link a:hover {
+          color: #EEEEEE;
+        }
+      }
+
+      @media (min-width: 768px) {
+        body {
+          font-size: 20px;
+        }
+        code {
+          font-size: 16px;
+        }
+      }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="alternate icon" href="/img/favicon.ico">
+  </head>
+  <body>
+    <article>
+      {{ content }}
+    </article>
+
+    <!-- <link href="/styles/prism-atom-dark.css" rel="stylesheet"> -->
+    <footer>
+      <div class="footer-content">
+      </div>
+    </footer>
+  </body>
+</html>
