@@ -11,7 +11,7 @@ That's why I want my blog to be extremely fast to load, and have very small amou
 
 ## Scripts
 
-A significant port of bloat [comes from various analytics scripts](https://linustechtips.com/main/topic/931387-gdpr-brings-massive-speed-improvement-to-websites/). Huge amount of various tracking scripts will make your page sluggish, and will scare off your users. Use them really, really sparingly.
+A significant port of bloat [comes from various analytics scripts](https://linustechtips.com/main/topic/931387-gdpr-brings-massive-speed-improvement-to-websites/). Huge amount of various tracking scripts will make your page sluggish, and will scare off your users. Use them really, really sparingly, if at all.
 
 ## Small CSS
 
@@ -24,6 +24,8 @@ Blogs often have minimal style - [the ones](https://medium.com/the-node-js-colle
 I wanted styles to be small enough, so that they can be loaded as inline `<style>` tag, instead of a separate file, saving a single HTTP request. Maybe except code highlighting, but it can be loaded later and nothing bad should happen.
 
 Harder to maintain? Yes, but the styles are small enough so it won't be a problem, and there's no risk of a customer asking me to change text color or font size somewhere.
+
+An example of a really cool site that uses styling very sparingly is [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html). It looks like it didn't change since its start in 1990s, but... it just works. It's functional.
 
 ## Static generation
 
