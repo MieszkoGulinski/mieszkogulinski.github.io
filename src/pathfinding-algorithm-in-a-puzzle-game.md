@@ -19,19 +19,19 @@ At first, let's interpret the game grid as a graph, where each non-occupied cell
 
 Here's a graph of possible movements on an empty grid:
 
-![Alt text](/img/pathfinding-1.svg)
+![pathfinding algorithm example - empty grid](/img/pathfinding-1.svg)
 
 A spanning tree is a tree graph that covers all vertices of connected graph. Usually there can be multiple spanning trees of a given graph, but we need to generate only one, and it doesn't really matter for the game rules what this spanning tree is. A tree graph has a property that, between two selected vertices, there's **only one unique path**. That's why creating a spanning tree is useful for creating a path for a ball to another available cell.
 
 Here's an example spanning tree of an empty grid:
 
-![Alt text](/img/pathfinding-2.svg)
+![pathfinding algorithm example - spanning tree](/img/pathfinding-2.svg)
 
 This tree has a root in the top left corner, but its root can be moved to any of its vertices and it'll still be a spanning tree of the graph.
 
 A spanning tree of a board, but with several balls blocking path to the bottom right corner, could look like that:
 
-![Alt text](/img/pathfinding-3.svg)
+![pathfinding algorithm example - spanning tree with blocked path](/img/pathfinding-3.svg)
 
 ### Tree generation algorithm
 
@@ -51,16 +51,16 @@ For example, if we can make a move from cell 0 to cell 1 and 9, the object will 
 
 For example, let's assume that we want to calculate paths from the top right corner. In the first iteration, starting from the starting point, we can go one right and one bottom:
 
-![Alt text](/img/pathfinding-4.svg)
+![pathfinding algorithm example - tree generation, iteration 1](/img/pathfinding-4.svg)
 
 The code checks that a potential next cell is a valid cell (so we can't go outside the field), is not occupied by a ball, and hasn't been added to the tree yet. In the second iteration, we find the following fields connected to the previously added ones:
 
-![Alt text](/img/pathfinding-5.svg)
+![pathfinding algorithm example - tree generation, iteration 2](/img/pathfinding-5.svg)
 
 And in the next iteration:
 
-![Alt text](/img/pathfinding-6.svg)
+![pathfinding algorithm example - tree generation, iteration 3](/img/pathfinding-6.svg)
 
-When we find the target cell, we don't need to continue the algorithm, because the path from start to end cell will already be covered with the spanning tree. But if we create a spanning tree and don't find the target cell, it means that there is no path between selected cells, and the player cannot make such a move.
+When we find the target cell, we don't need to continue the algorithm, because the path from start to end cell will already be covered with the incomplete spanning tree. But if we create a spanning tree and don't find the target cell, it means that there is no path between selected cells, and the player cannot make such a move.
 
 When the tree contains both the start and end cells, and the start cell is at the root, we can find the cells on every step from the end towards the root, and then reverse the array.
