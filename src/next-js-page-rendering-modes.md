@@ -22,7 +22,7 @@ Next.js uses several page rendering modes:
 
 - **static generation** - a page is generated during **build time**,
 - **server-side rendering** - a page is generated on-demand, every time it's requested,
-- **cached mode** - a page is generated both during build time and after it's requested. After being generated, it's cached for a specified amount of time, then it's generated again when it's requested.
+- **incremental static regeneration** - a page is generated both during build time and after it's requested. After being generated, it's cached for a specified amount of time, then it's generated again when it's requested.
 
 In Next.js, **generation** means querying the resources and rendering React JS code to HTML.
 
@@ -39,7 +39,7 @@ An asynchronous function `getStaticProps` queries the resources during build tim
 
 A page that can take a parameter in the path, e.g. `/blog/[slug]`, to be rendered during build time, requires a function that enumerates every possible value of the parameter. Then, for each possible value of the parameter, a page is individually generated. It's a limitation, but without knowing in advance what values can the parameter have, generating pages in advance isn't possible.
 
-Pages without `getStaticProps` or `getServerSideProps` don't use Next.js for getting initial data - they'll display what is hardcoded in React markup. Of course, they can query an API from the client side.
+Pages without `getStaticProps` or `getServerSideProps` don't use Next.js for getting initial data - they'll just display what is there in their React code. On such pages, React is active on the client side, and can load data by querying an API.
 
 ### Server-side rendering
 This mode is triggered by having an exported `getServerSideProps` function. In this mode, every time the page is requested from the server, this function is called, and with the received props, React markup is rendered to HTML.
@@ -59,8 +59,8 @@ export const getServerSideProps = async (context) => {
 };
 ```
 
-### Cached mode
-I don't know what "official" name this mode has, Next.js documentation doesn't give it a specific name. This mode generates the page during build time, but the pre-built page isn't stored permanently. After a specified time passes since last generation of the page, it's generated again, and the new version is after the
+### Incremental static regeneration (cached mode)
+This mode generates the page during build time, but the pre-built page isn't stored permanently. After a specified time passes since last generation of the page, after the page is requested, the old version is sent to the user, but the page starts being generated again, and the new version is stored in a cache and will be available on the next request.
 
 This mode is triggered by having `getStaticProps` with `revalidate` in the options, like that:
 
