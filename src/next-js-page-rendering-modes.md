@@ -111,6 +111,9 @@ const SomeSwitch = () => {
 
 An additional limitation of Next.js is that during server-side rendering, it's not possible to get the current path parameters from [the router](https://nextjs.org/docs/api-reference/next/router#router-object).
 
+### Writable filesystem
+Incremental static regeneration requires the file system to be writable. It's a limitation when deploying to certain environments, such as Google App Engine standard environment, with read-only filesystem except `/tmp` path (and Next.js cannot use it, as it doesn't support path configuration).
+
 ## Example
 I built a help page for some company, it features articles and blog posts, fetched from an external API (a headless CMS).
 
