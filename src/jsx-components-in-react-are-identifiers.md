@@ -1,6 +1,6 @@
 ---
 layout: post.liquid
-pageTitle: JSX, React components and what you can do with that
+pageTitle: JSX components in React are JavaScript identifiers
 date: 2021-09-25
 tags: posts
 ---
@@ -21,7 +21,25 @@ const PageHeader = () => {
 ```
 will be rendered as HTML `<h1>Page Name</h1>`.
 
-This particular example isn't really useful, but storing the tag name in a constant is handy when we want the tag to be configurable.
+This particular example isn't really useful, but the string with HTML element name could be selected by some logic. For example, a component could select the resulting HTML header level depending on a number given in props:
+
+```
+const componentNamesByLevel = {
+  1: 'h1',
+  2: 'h2',
+  3: 'h3',
+  4: 'h4',
+  5: 'h5'
+}
+
+const Header = (props) => {
+  const { level, children } = props;
+  const HeaderComponent = componentNamesByLevel[level] || 'h5';
+  return <HeaderComponent>{children}</HeaderComponent>;
+}
+```
+
+Note that if you use TypeScript, it may complain about about using a string in place of a React component.
 
 ## One or another component
 
@@ -43,8 +61,9 @@ const Header = (props) => {
   );
 }
 ```
+A component can also come as prop to another component. For example, in MUI library, [component Dialog can accept a component in BackdropComponent prop](https://mui.com/material-ui/api/dialog/).
 
-Also, it's possible to combine both possibilities - for example if we want to pass component in props (it's entirely possible), or use some default HTML tag, we can do something like that:
+Also, it's possible to combine both possibilities - for example if we want to pass a component in props, or use some default HTML tag, we can do something like that:
 ```
 const Item = (props) => {
   const Component = props.component || 'div';
@@ -55,4 +74,14 @@ where `props.component` can be a React component, or a string.
 
 ## Why did I write that?
 
-It's very easy to forget about this capability of React, when in the code a single component is always under a single identifier. Let's not forget that React component name works just like every other identifier in JavaScript.
+It's very easy to forget about this capability of React, when in the code a single component is always under a single identifier:
+```
+import SomeComponent from './SomeComponent';
+
+const SomeOtherComponent = (props) => {
+  ...
+  return <SomeComponent> ... </SomeComponent>
+}
+```
+
+Let's not forget that React component name works just like every other identifier in JavaScript.

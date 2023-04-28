@@ -117,7 +117,7 @@ Incremental static regeneration requires the file system to be writable. It's a 
 ## Example
 I built a help page for some company, it features articles and blog posts, fetched from an external API (a headless CMS).
 
-- For an article page, I used **cached mode**. This way, when an editor makes an update to the article, it'll be visible to the visitors after the cache expires. In this particular case, the expiration time was set to 10 minutes.
+- For an article page, I used **incremental static regeneration**. This way, when an editor makes an update to the article, it'll be visible to the visitors after the cache expires. In this particular case, the expiration time was set to 10 minutes.
 - The same for article lists (global and from each category).
 - For the search page, I used **server-side rendering**, as it's not possible to predict what the user enters in the search input. The search page has a limited number of results displayed...
 - ...and clicking "load more" button performs a call to an **API route**.

@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"><title>JSX components in React are JavaScript identifiers</title><style>body,html{margin:0 0}body{color:#222;font-size:18px;line-height:1.5}.header-content,article,footer{margin:0 auto;padding:0 15px;max-width:710px}h1{border-bottom:2px solid #ffd744;padding-bottom:15px;font-size:32px}.blog-name{text-align:center;padding-bottom:25px}h2{font-size:24px}h3{font-size:20px}a{text-decoration:none;color:#927200;transition:color .25s ease-out}a:hover{color:#bb9200}code{font-size:14px}pre{overflow:auto}img{max-width:100%}.footer-content{margin-top:15px;border-top:2px solid #ffd744;padding-top:15px;padding-bottom:15px}.art-list-link{font-size:22px;margin-bottom:5px}.art-list-link a{color:#222;transition:color .2s ease-out}.art-list-link a:hover{color:#555}.art-list-date{font-size:16px}@media (prefers-color-scheme:dark){body{background:#222;color:#fff}a{color:#ffd744}a:hover{color:#bb9200}.art-list-link a{color:#fff}.art-list-link a:hover{color:#eee}}@media (min-width:768px){body{font-size:20px}code{font-size:16px}}</style><link href="/img/favicon.svg" rel="icon" type="image/svg+xml"><link href="/img/favicon.ico" rel="alternate icon"></head><body><article><h1>JSX components in React are JavaScript identifiers</h1><p>In React with JSX, rendering a JSX tag name beginning with a capital letter takes the component specification from an <strong>identifier</strong> in the surrounding scope.</p><p>It means that if you render <code>&lt;SomeName /></code> in JSX, and you have a function under identifier <code>SomeName</code>, React will use it as the functional component. If there's a class, inheriting from <code>React.Component</code>, React will render it as a class component.</p><h2>Directly render a HTML tag</h2><p>But there's another possibility. If the variable under that identifier is a <strong>string</strong>, the component will be rendered directly as a HTML component. For example a component declared like that:</p><pre><code>const PageHeader = () => {
+  const HeaderComponent = 'h1';
+  return &lt;HeaderComponent>Page Name&lt;/HeaderComponent>;
+}
+</code></pre><p>will be rendered as HTML <code>&lt;h1>Page Name&lt;/h1></code>.</p><p>This particular example isn't really useful, but the string with HTML element name could be selected by some logic. For example, a component could select the resulting HTML header level depending on a number given in props:</p><pre><code>const componentNamesByLevel = {
+  1: 'h1',
+  2: 'h2',
+  3: 'h3',
+  4: 'h4',
+  5: 'h5'
+}
+
+const Header = (props) => {
+  const { level, children } = props;
+  const HeaderComponent = componentNamesByLevel[level] || 'h5';
+  return &lt;HeaderComponent>{children}&lt;/HeaderComponent>;
+}
+</code></pre><p>Note that if you use TypeScript, it may complain about about using a string in place of a React component.</p><h2>One or another component</h2><p>Also, don't forget that it's possible to have configurable component as different name.</p><pre><code>const RedText = (props) => {
+  return &lt;span style=>{props.children}&lt;/span>;
+}
+const GreenText = () => {
+  return &lt;span style=>{props.children}&lt;/span>;
+}
+
+const Header = (props) => {
+  const TextComponent = props.green ? GreenText : RedText;
+  return (
+    &lt;h1>
+      &lt;TextComponent>{props.children}&lt;/TextComponent>
+    &lt;/h1>
+  );
+}
+</code></pre><p>A component can also come as prop to another component. For example, in MUI library, <a href="https://mui.com/material-ui/api/dialog/">component Dialog can accept a component in BackdropComponent prop</a>.</p><p>Also, it's possible to combine both possibilities - for example if we want to pass a component in props, or use some default HTML tag, we can do something like that:</p><pre><code>const Item = (props) => {
+  const Component = props.component || 'div';
+  return &lt;Component>...&lt;/Component>;
+}
+</code></pre><p>where <code>props.component</code> can be a React component, or a string.</p><h2>Why did I write that?</h2><p>It's very easy to forget about this capability of React, when in the code a single component is always under a single identifier:</p><pre><code>import SomeComponent from './SomeComponent';
+
+const SomeOtherComponent = (props) => {
+  ...
+  return &lt;SomeComponent> ... &lt;/SomeComponent>
+}
+</code></pre><p>Let's not forget that React component name works just like every other identifier in JavaScript.</p><a href="/">Go back to home page</a></article><footer><div class="footer-content"><a href="https://www.radcode.co/">Do you need an app?</a></div></footer></body></html>
