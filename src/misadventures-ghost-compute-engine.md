@@ -60,4 +60,4 @@ For authentication with Google Cloud Storage, upload the key file in JSON format
 
 ## RAM
 
-Running `ghost doctor` says that the instance 
+Running `ghost doctor` says that the instance doesn't have enough RAM, even though everything is installed on a VM with 1 GB of RAM, [which is enough according to Ghost documentation](https://ghost.org/docs/install/ubuntu/#prerequisites). I don't know if it's going to cause problems.
