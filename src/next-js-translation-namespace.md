@@ -179,3 +179,6 @@ export default SomePage;
 How much it's going to help? It very much depends on size of translations on your site, how many languages you support, and how many messages can be moved to their namespaces.
 
 In my case, moving content of several pages to namespaces (not all of them, we can move more texts) decreased `_app.tsx` size by tens of kB.
+
+## Update (16 May)
+See [the article about dynamic import](/next-js-conditional-dynamic-import) too - it's another thing that could reduce bundle size when using Next.js localization.

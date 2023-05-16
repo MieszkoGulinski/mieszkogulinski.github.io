@@ -12,7 +12,7 @@ At work, I was installing [Ghost CMS](https://ghost.org/) on Google Compute Engi
 - Ghost version is 5.45.1, installed through Ghost CLI. 
 - Operating system is Ubuntu 22.04
 - Node.js version is 16.20.0 (as Node 16 is recommended in Ghost documentation). 
-- Compute Engine instance type is [e2-micro](https://cloud.google.com/compute/docs/general-purpose-machines#e2-shared-core), with 10 GB of [Balanced type](https://cloud.google.com/compute/docs/disks#pdspecs) storage.
+- Compute Engine instance type is [e2-micro](https://cloud.google.com/compute/docs/general-purpose-machines#e2-shared-core), with 10 GB of [Balanced type](https://cloud.google.com/compute/docs/disks#pdspecs) storage. (**Update: 1 GB RAM is highly probably not enough, seriously consider use larger RAM size**)
 
 ## Compute Engine settings
 
@@ -61,3 +61,31 @@ For authentication with Google Cloud Storage, upload the key file in JSON format
 ## RAM
 
 Running `ghost doctor` says that the instance doesn't have enough RAM, even though everything is installed on a VM with 1 GB of RAM, [which is enough according to Ghost documentation](https://ghost.org/docs/install/ubuntu/#prerequisites). I don't know if it's going to cause problems.
+
+## RAM update (May 8)
+
+It seems that the RAM **is routinely overfilled**. Checking usage of free memory shows that we have hardly any memory left, and we don't have any swap:
+```
+$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             965         811          64           1          90          34
+Swap:              0           0           0
+```
+
+So I followed [this instruction about setting up swap](https://medium.com/geekculture/setup-a-free-self-hosted-blog-in-under-15-minutes-717480c5097b):
+```
+$ sudo fallocate -l 1.2G /swapfile
+$ sudo chmod 600 /swapfile
+$ sudo mkswap /swapfile
+$ sudo nano /etc/fstab
+```
+
+Then add to `/etc/fstab` a line: `/swapfile swap swap defaults 0 0 line`, save and run `sudo reboot`.
+
+After restarting the instance, we can see that swap is active:
+```
+$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             965         641          68           0         255         170
+Swap:           1228          80        1148
+```
