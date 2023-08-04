@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: HTML <object> element as a quick preview
 date: 2021-06-03
 tags: posts
+pageDescription: How to use HTML object element to display various type of content
 ---
 
 HTML `object` can embed multiple types of items downloaded from given URL:

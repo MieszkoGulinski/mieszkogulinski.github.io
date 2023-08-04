@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: Electron JS and ZeroMQ build error
 date: 2020-12-11
 tags: posts
+pageDescription: Solution to error happening when building Electron framework with zeromq
 ---
 
 This error happened to me on Electron 8, zeromq 5.2.0, Mac OS Catalina. Other library versions or OSes may need adjustments.

@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: (Mis)adventures when installing Ghost CMS on Google Compute Engine
 date: 2023-03-08
 tags: posts
+pageDescription: Quick tutorial and troubleshooting of Ghost CMS deployment on VPS server
 ---
 
 # Installing Ghost

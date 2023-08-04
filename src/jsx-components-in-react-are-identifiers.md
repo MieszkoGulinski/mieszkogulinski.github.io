@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: JSX components in React are JavaScript identifiers
 date: 2021-09-25
 tags: posts
+pageDescription: JSX syntax in React - how to conditionally display one of the available React components or HTML elements
 ---
 
 In React with JSX, rendering a JSX tag name beginning with a capital letter takes the component specification from an **identifier** in the surrounding scope.

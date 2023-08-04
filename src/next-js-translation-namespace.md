@@ -1,11 +1,12 @@
 ---
 layout: post.liquid
-pageTitle: Next.js and FormatJS language namespacing
+pageTitle: Next.js and react-intl (FormatJS) language namespacing
 date: 2023-05-08
 tags: posts
+pageDescription: How to decrease bundle size in Next.js when using react-intl / FormatJS by dividing translations into separate files
 ---
 
-As a part of my job, I work on a certain website using Next.js and FormatJS. As indicated by [Pagespeed Insights](https://pagespeed.web.dev/), file `_app.tsx` has lots of unused code andits size could be reduced to improve loading time and decrease data usage. Here's an optimization that reduces bundle size when using FormatJS and Next.js, especially for large websites.
+As a part of my job, I work on a certain website using Next.js and react-intl (part of FormatJS). As indicated by [Pagespeed Insights](https://pagespeed.web.dev/), file `_app.tsx` has lots of unused code andits size could be reduced to improve loading time and decrease data usage. Here's an optimization that reduces bundle size when using FormatJS and Next.js, especially for large websites.
 
 ## Problem
 
@@ -180,5 +181,5 @@ How much it's going to help? It very much depends on size of translations on you
 
 In my case, moving content of several pages to namespaces (not all of them, we can move more texts) decreased `_app.tsx` size by tens of kB.
 
-## Update (16 May)
+## Update (16 May 2023)
 See [the article about dynamic import](/next-js-conditional-dynamic-import) too - it's another thing that could reduce bundle size when using Next.js localization.

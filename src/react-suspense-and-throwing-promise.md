@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: React Suspense and throwing a Promise
 date: 2021-06-21
 tags: posts
+pageDescription: How and when to use React Suspense feature
 ---
 
 Do you know that in JavaScript, you `throw` a `Promise`? This is used in a new feature of React, called Suspense.

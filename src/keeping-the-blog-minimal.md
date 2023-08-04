@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: Keeping the blog minimal
 date: 2021-06-26
 tags: posts
+pageDescription: How this blog is internally made, and how it's optimized for very fast loading
 ---
 
 Bloated and slowly loading websites [scare off users](https://medium.com/pinterest-engineering/driving-user-growth-with-performance-improvements-cfc50dafadd7), [rank lower in search results](https://www.forbes.com/sites/jiawertz/2017/07/17/why-site-speed-design-can-make-or-break-your-google-ranking/), and apparently [are bad for the environment](https://www.websitecarbon.com/).

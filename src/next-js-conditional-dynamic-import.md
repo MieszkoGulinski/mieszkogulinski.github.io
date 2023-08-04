@@ -3,11 +3,12 @@ layout: post.liquid
 pageTitle: Next.js conditional dynamic import
 date: 2023-05-16
 tags: posts
+pageDescription: How to use Next.js dynamic import more effectively
 ---
 
 While [it's not fully clear from documentation](https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading), and a [Stack Overflow answer](https://stackoverflow.com/questions/66791922/conditionally-import-module-using-next-js-dynamic-import-ssr-doesnt-work) doesn't provide that information explicitly enough, Next.js dynamic import can be used for **conditional** importing of React components.
 
-Most examples of dynamic import are about a case where a component is displayed or not, like a modal opened on :
+Most examples of dynamic import are about a case where a component is displayed or not, like a modal opened on clicking a button:
 ```tsx
 import dynamic from "next/dynamic";
 const Modal = dynamic(() => import("./Modal"));
@@ -29,17 +30,17 @@ But let's not forget that it's also possible to conditionally import and display
 For a moment let's forget about translation libraries, and let's suppose that we have several variants of components for multiple languages. In actual usage, dynamic import makes sense when the components are large, but for the purpose of this example, let's consider these examples:
 
 ```tsx
-const GreetingEN: React.FC = () => <div>Nice to meet you<div>;
+const GreetingEN: React.FC = () => <div>Hello!<div>;
 export default GreetingEN;
 ```
 
 ```tsx
-const GreetingPL: React.FC = () => <div>Miło Cię poznać</div>;
+const GreetingPL: React.FC = () => <div>Cześć!</div>;
 export default GreetingPL;
 ```
 
 ```tsx
-const GreetingJA: React.FC = () => <div>はぢめまして</div>;
+const GreetingJA: React.FC = () => <div>こんにちは</div>;
 export default GreetingJA;
 ```
 
@@ -49,7 +50,7 @@ Let's augment the code with `console.log`:
 console.log('import EN');
 const GreetingEN: React.FC = () => {
   console.log('render EN');
-  return <div>Nice to meet you<div>
+  return <div>Hello!<div>
 }
 export default GreetingEN;
 ```
@@ -57,7 +58,7 @@ export default GreetingEN;
 console.log('import PL');
 const GreetingPL: React.FC = () => {
   console.log('render PL');
-  return <div>Miło Cię poznać</div>
+  return <div>Cześć!</div>
 }
 export default GreetingPL;
 ```
@@ -65,7 +66,7 @@ export default GreetingPL;
 console.log('import JA');
 const GreetingJA: React.FC = () => {
   console.log('render JA');
-  return <div>はぢめまして</div>
+  return <div>こんにちは</div>
 }
 export default GreetingJA;
 ```

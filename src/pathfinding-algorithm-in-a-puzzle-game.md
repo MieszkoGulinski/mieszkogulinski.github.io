@@ -3,11 +3,12 @@ layout: post.liquid
 pageTitle: Pathfinding algorithm in a puzzle game
 date: 2021-10-14
 tags: posts
+pageDescription: How to find a path between two selected locations in a puzzle game with items on a grid
 ---
 
 In [this puzzle game](https://mieszkogulinski.github.io/react-kulki/), the player has to move colorful balls on a grid. When there are 5 (or more) balls of the same color in a row (horizontally, vertically, diagonally), the series disappears and the player is awarded some score. After a move that doesn't result in a disappearing series, 3 more balls (in random location, in random color) appear on the board. The balls can be moved only when there's a clear path from one location to another - from one grid to another, they can move up, down, left or right.
 
-One of the original implementations of this game was made for Windows 3.1, so it doesn't work on modern computers anymore. That's why I created a clone of this logic game, written in JavaScript and HTML, with [React](https://reactjs.org/). Feel free to play it in your free time!
+One of the original implementations of this game was made for Windows 3.1, so it doesn't work on modern computers anymore. That's why I created a clone of that game, written in JavaScript and HTML, with [React](https://reactjs.org/). Feel free to play it in your free time!
 
 ## How does the pathfinding algorithm work?
 

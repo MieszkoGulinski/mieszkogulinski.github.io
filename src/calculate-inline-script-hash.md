@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: Calculate inline script hash for Content Security Policy with Firefox or Chrome development tools
 date: 2021-06-08
 tags: posts
+pageDescription: Method of obtaining hashes of an inline scripts, needed for Content Security Policy, to prevent execution of injected malicious inline scripts.
 ---
 
 Content Security Policy (CSP) settings help improving website security by allowing usage of resources only from specified origins. For example, it's possible to prevent the website from executing scripts not coming from our server, or prevent performing HTTP requests to addresses other than ours.

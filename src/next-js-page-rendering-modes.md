@@ -3,6 +3,7 @@ layout: post.liquid
 pageTitle: Next.js page rendering modes - a short guide
 date: 2021-09-25
 tags: posts
+pageDescription: When to use various modes of page rendering in Next.js - server-side rendering (SSR), static generation (SSG) and incremental static regeneration (ISR)
 ---
 
 [Next.js](https://nextjs.org/) is a framework that allows pre-rendering and server-side rendering of pages written in [React](https://reactjs.org/), and comes integrated with a HTTP server.
@@ -124,3 +125,6 @@ I built a help page for some company, it features articles and blog posts, fetch
 - The error page is fully hardcoded in React and doesn't fetch any data, so it's **statically generated**.
 
 Every project has its own requirements, so it's always important to know what tools are available, and when to use them.
+
+## Update (2023)
+This article is about Next.js using [`/pages` router](https://nextjs.org/docs/pages/building-your-application/routing). In the newest versions, Next.js has an [`/app` router](https://nextjs.org/docs/app/building-your-application/routing), where individual components may perform their own data fetching.
