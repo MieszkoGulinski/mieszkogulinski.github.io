@@ -112,8 +112,11 @@ const SomeSwitch = () => {
 
 An additional limitation of Next.js is that during server-side rendering, it's not possible to get the current path parameters from [the router](https://nextjs.org/docs/api-reference/next/router#router-object).
 
-### Writable filesystem
-Incremental static regeneration requires the file system to be writable. It's a limitation when deploying to certain environments, such as Google App Engine standard environment, with read-only filesystem except `/tmp` path (and Next.js cannot use it, as it doesn't support path configuration).
+### Writable filesystem (updated 2024)
+Incremental static regeneration requires the file system to be writable. It's a limitation when deploying to certain environments, such as Google App Engine standard environment, with read-only filesystem except `/tmp` path.
+
+Next.js [since version 14.1](https://nextjs.org/blog/next-14-1#improved-self-hosting) supports [configurable cache](https://nextjs.org/docs/app/building-your-application/deploying#configuring-caching), which means that on Google App Engine standard environment, Next.js can use `/tmp` directory to store the files generated during incremental static regeneration. This feature also allows to use other mechanisms for storing the cached items, such as Redis, where the cache can be shared between multiple instances of the application, and easily invalidated with a single request.
+
 
 ## Example
 I built a help page for some company, it features articles and blog posts, fetched from an external API (a headless CMS).
