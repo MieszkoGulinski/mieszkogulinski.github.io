@@ -121,6 +121,6 @@ A related PostgreSQL command `EXPLAIN ANALYZE` actually performs the query, and 
 
 This article is a basic introduction to indexes in SQL databases. For more advanced topics, see the following resources:
 
-- https://use-the-index-luke.com/ - a website about indexing in SQL databases, with a lot of examples and explanations
-- https://www.postgresql.org/docs/current/indexes.html - PostgreSQL documentation about indexes
-- https://explain.depesz.com/ - a tool for visualizing the output of the `EXPLAIN` command in PostgreSQL
+- [https://use-the-index-luke.com/](https://use-the-index-luke.com/) - a website about indexing in SQL databases, with a lot of examples and explanations
+- [https://www.postgresql.org/docs/current/indexes.html](https://www.postgresql.org/docs/current/indexes.html) - PostgreSQL documentation about indexes
+- [https://explain.depesz.com/](https://explain.depesz.com/) - a tool for visualizing the output of the `EXPLAIN` command in PostgreSQL
