@@ -6,8 +6,6 @@ tags: posts
 pageDescription: A short introduction to indexes in SQL databases, mostly concentrating on PostgreSQL and SQLite.
 ---
 
-# Introduction to indexes in SQL databases
-
 This article is a short introduction to indexes in SQL databases, mostly concentrating on PostgreSQL and SQLite.
 
 ## Why do we need indexes?
