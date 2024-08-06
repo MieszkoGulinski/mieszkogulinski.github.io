@@ -117,6 +117,7 @@ Incremental static regeneration requires the file system to be writable. It's a 
 
 Next.js [since version 14.1](https://nextjs.org/blog/next-14-1#improved-self-hosting) supports [configurable cache](https://nextjs.org/docs/app/building-your-application/deploying#configuring-caching), which means that on Google App Engine standard environment, Next.js can use `/tmp` directory to store the files generated during incremental static regeneration. This feature also allows to use other mechanisms for storing the cached items, such as Redis, where the cache can be shared between multiple instances of the application, and easily invalidated with a single request.
 
+A library that can be used to create an ISR cache is [`@neshca/cache-handler`](https://caching-tools.github.io/next-shared-cache) that provides a built-in Redis and in-memory cache handlers, and also allows to create custom cache handlers.
 
 ## Example
 I built a help page for some company, it features articles and blog posts, fetched from an external API (a headless CMS).

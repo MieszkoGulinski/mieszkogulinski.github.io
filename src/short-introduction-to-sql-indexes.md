@@ -24,11 +24,13 @@ Also, adding an index also doesn't speed up reading from the database:
 
 [The basic rule of thumb](https://dba.stackexchange.com/questions/31514/how-do-i-know-what-indexes-to-create-for-a-table) is to add an index on:
 - primary key (PostgreSQL automatically adds an index to the primary key column)
-- foreign keys
-- other columns that are used in `WHERE` operations
+- foreign keys, particularly when used in `JOIN` operations
+- other columns that are used in `WHERE` operations, unless the column contains a small number of distinct values (for example, a boolean or enum column)
 - other columns that are used in `JOIN` operations
 
-This does not need to apply to queries done only once, or very rarely. Also, these are only rules of thumb, and to obtain the best performance, it's necessary to measure the performance of the  queries, and to add or remove indexes as necessary.
+This does not need to apply to queries done only once, or very rarely.
+
+Also, these are only rules of thumb, and to obtain the best performance, it's necessary to measure the performance of the queries, and to add or remove indexes as necessary.
 
 Still, these rules of thumb are a good starting point, and if the database does not fulfill these rules, it's typically necessary to apply them as soon as possible. After that, performing more optimizations related to indexing will be worth it only when performance problems arise.
 
