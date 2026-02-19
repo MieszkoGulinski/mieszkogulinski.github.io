@@ -17,15 +17,17 @@ Adding an index to a database column makes **filtering** (in `WHERE` condition) 
 Although adding an index to a column makes filtering an joining on that column faster, it also needs to be updated when performing insert, update and delete operations, making them slower. Also, an index takes up space on the disk and in RAM. That's why the index should be used **only** on the columns that are used in filtering and joining operations.
 
 Also, adding an index also doesn't speed up reading from the database:
-- when the column is included only in the list of returned columns (SELECT clause), but not in WHERE or JOIN clauses
 - when the table is small, and the database engine can perform a sequential scan faster than using the index - but the database engine should be able to figure this out by itself, so there's no use in removing the index in such cases
+- when the column is included only in the list of returned columns (SELECT clause), but not in WHERE or JOIN clauses - except in the case of a covering index, where the index contains all the columns needed to answer the query
+
+In addition to that, enforcing uniqueness of values in a column (or a set of columns), using `UNIQUE` constraint, is also implemented using an index.
 
 ## Where do we need indexes?
 
 [The basic rule of thumb](https://dba.stackexchange.com/questions/31514/how-do-i-know-what-indexes-to-create-for-a-table) is to add an index on:
 - primary key (PostgreSQL automatically adds an index to the primary key column)
 - foreign keys, particularly when used in `JOIN` operations
-- other columns that are used in `WHERE` operations, unless the column contains a small number of distinct values (for example, a boolean or enum column)
+- other columns that are used in `WHERE` operations, unless the column has low cardinality, meaning that it contains a small number of distinct values (for example, a boolean or enum column)
 - other columns that are used in `JOIN` operations
 
 This does not need to apply to queries done only once, or very rarely.
@@ -44,13 +46,13 @@ An expression that can be efficiently used in the left side of the equation [is 
 
 Some database engines (at least [PostgreSQL](https://www.postgresql.org/docs/current/indexes-expressional.html) and [SQLite](https://www.sqlite.org/lang_createindex.html)) support indexes on expressions, which can be used in such cases.
 
-### Automatic index creation
+## Automatic index creation
 
-Database engines can automatically add an index to a column, but the rules for this are different for different DBMS. For example, PostgreSQL automatically adds an index to the primary key column, and the columns marked UNIQUE. It's necessary to check the documentation of the DBMS used.
+Database engines can automatically add an index to a column, but the rules for this are different for different DBMS. For example, PostgreSQL automatically adds an index to the primary key column, and the columns marked `UNIQUE`. It's necessary to check the documentation of the DBMS used.
 
 Also, database ORMs may or may not automatically add indexes to foreign keys. That's why it's necessary to check the documentation of the ORM used, and explicitly mark a column as indexed where necessary.
 
-### What indexes are already added to a table?
+## What indexes are already added to a table?
 
 In PostgreSQL, to check if a column in a given table is already indexed, in the `psql` CLI, use `\d table_name` command to obtain information about a table. List of indexes will be shown below the list of columns.
 
@@ -83,6 +85,8 @@ Typically, the index is added to a single column. At least PostgreSQL and SQLite
 - multi-column indexes, used for conditions like `WHERE a = 1 AND b = 2`, including composite primary keys
 - partial indexes, used for conditions like `WHERE a = 1` in a table with a lot of entries where `a` is usually not 1
 - index on expression, used for conditions like `WHERE a + b = 1`
+
+Partial indexes, in addition to speeding up queries, can also be used to enforce uniqueness with more complicated conditions than simple `UNIQUE` constraint. For example, if we want to allow only one row with a given value in column `a` for each value in column `b`, we can use a partial index on `(a, b)` with condition `WHERE a IS NOT NULL`.
 
 ## Special types of indexes, by how the index is implemented
 
