@@ -89,7 +89,7 @@ Typically, the index is added to a single column. At least PostgreSQL and SQLite
 Typically, the index is internally implemented as a [B-tree](https://use-the-index-luke.com/sql/anatomy/the-tree), which is an efficient data structure for searching ordered entries. Such indexes are useful for range queries, such as `WHERE a > 1 AND a < 3`. In PostgreSQL, the B-tree index is the default index type.
 
 For more specialized purposes, there are other types of indexes. Because this is an advanced topic, look up the DBMS documentation for details about them, for example [list of available index types in PostgreSQL](https://www.postgresql.org/docs/current/indexes-types.html). Some of the options are:
-- hash index, used for equality comparisons, such as `WHERE a = 1`
+- hash index, useful only for equality comparisons such as `WHERE a = 1`, and rarely significantly more efficient than B-tree,
 - full-text search index (but if your application makes heavy use of full text search, consider using a specialized search engine, such as Elasticsearch, for this purpose)
 
 In SQLite, the index type [is not specified when adding an index](https://www.sqlite.org/lang_createindex.html). Special types of indexes, such as [full text search](https://www.sqlite.org/fts5.html), are supported using [virtual tables](https://www.sqlite.org/vtab.html) mechanism.
